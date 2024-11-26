@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<!-- 页面内容显示 -->
+<div class="content" id="content">
+    <h1>光电计算</h1>
+</div>
+<div title="光学参数计算器">
+<div class="input-container">
+    <div class="input-row">
+        <label>分辨率：</label>
+        <input type="number" id="resolutionWidth" value="640"> x 
+        <input type="number" id="resolutionHeight" value="512">
+    </div>
+    <div class="input-row">
+        <label>像元尺寸 (μm)：</label>
+        <input type="number" id="pixelSize" value="12">
+    </div>
+    <div class="input-row">
+        <label>焦距 (mm)：</label>
+        <input type="number" id="focalLength" value="300">
+    </div>
+    <div class="input-row">
+        <label>目标尺寸 (m)：</label>
+        <input type="number" id="targetLength" value="3"> x 
+        <input type="number" id="targetWidth" value="4">
+    </div>
+    <div class="input-row">
+        <label>目标距离 (km)：</label>
+        <input type="number" id="targetDistance" value="1">
+    </div>
+    <button class="calculate-button" onclick="calculateOptics()">计算 </button>
+    <div class="result" id="result"></div>
+</div>   
+
+</body>
+</html>
