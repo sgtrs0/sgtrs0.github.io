@@ -1,0 +1,249 @@
+/* 基本样式 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+}
+
+/* 大标题样式 */
+.header {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  margin: 0;
+}
+
+/* 菜单图标样式 */
+.menu-icon {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* 菜单图标的汉堡条样式 */
+.menu-icon div {
+  width: 30px;
+  height: 4px;
+  background-color: white;
+  margin: 6px 0;
+  transition: 0.3s;
+}
+
+/* 菜单滑出样式 */
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #444;
+  color: white;
+  padding-top: 80px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 9;
+}
+
+/* 菜单项目样式 */
+.menu a {
+  padding: 15px 25px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  display: block;
+  transition: background 0.3s ease;
+}
+
+.menu a:hover {
+  background-color: #575757;
+}
+
+/* 控制菜单显示 */
+.menu.active {
+  transform: translateX(0);
+}
+
+/* 页面内容样式 */
+/* 设置内容区域的样式 */
+.content {
+  /* 设置左边距为60px */
+  /*margin-left: 60px;*/
+  /* 设置内边距为20px */
+  padding: 20px;
+  /* 设置字体大小为24px */
+  font-size: 24px;
+  /* 设置字体颜色为#333 */
+  color: #333;
+  /* 设置过渡效果，当左边距变化时，持续0.3s，使用ease函数 */
+  transition: margin-left 0.3s ease;
+  /* 设置文本居中对齐 */
+  text-align: center;
+}
+
+/* 输入区域的外框 */
+.input-container {
+  border: 1px solid #ddd;
+  padding: 20px;
+/* 设置外边距为20px，水平居中 */
+  margin: 20px auto; /* 使容器在中心 */
+  border-radius: 5px;
+  background-color: #ffffff;
+  max-width: 600px; /* 最大宽度 */
+}
+
+/* 输入字段样式 */
+.input-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0; /* 调整间距 */
+}
+
+/* 标签样式 */
+.input-field label {
+  margin-right: 10px;
+  width: 150px; /* 标签宽度 */
+  text-align: right;
+}
+
+/* 输入框样式 */
+.input-field input {
+  padding: 10px; /* 增加内边距 */
+  font-size: 16px;
+  width: 100px; /* 输入框宽度 */
+  border: 1px solid #ccc; /* 边框样式 */
+  border-radius: 4px; /* 圆角 */
+}
+
+/* 按钮样式 */
+.calculate-button {
+  background-color: #007bff; /* 按钮背景色 */
+  color: white; /* 按钮文本颜色 */
+  border: none; /* 去掉边框 */
+  padding: 10px 15px; /* 按钮内边距 */
+  font-size: 16px; /* 按钮字体大小 */
+  border-radius: 5px; /* 按钮圆角 */
+  cursor: pointer; /* 鼠标悬停效果 */
+  margin-top: 20px; /* 顶部间距 */
+}
+
+/* 按钮悬停效果 */
+.calculate-button:hover {
+  background-color: #0056b3; /* 悬停时的背景色 */
+}
+
+/* 结果显示样式 */
+.result {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #ff00bb;
+  text-align: left; /* 文本左对齐 */
+  max-width: 600px; /* 最大宽度 */
+  margin: 20px auto; /* 在中心对齐 */
+}
+
+/* 定义一个.input-container类，用于设置输入框的样式 */
+.input-container {
+  /* 设置内边距为20px */
+  padding: 20px;
+  /* 设置最大宽度为600px */
+  max-width: 600px;
+  /* 设置外边距为20px，自动居中 */
+  margin: 20px auto;
+  /* 设置背景颜色为白色 */
+  background: #ffffff;
+  /* 设置边框为1px的实线，颜色为#ddd */
+  border: 1px solid #ddd;
+  /* 设置边框圆角为5px */
+  border-radius: 5px;
+}
+
+/* 定义.input-row类，用于设置输入框的布局 */
+.input-row {
+  display: flex; /* 使用flex布局 */
+  justify-content: space-between; /* 水平方向上平均分布子元素 */
+  align-items: center; /* 垂直方向上居中对齐子元素 */
+  margin-bottom: 15px; /* 设置底部外边距 */
+}
+
+/* 定义.input-row类下的label元素，用于设置标签的样式 */
+.input-row label {
+  flex: 0 1 40%; /* 设置标签的宽度为40% */
+  font-weight: bold; /* 设置标签的字体加粗 */
+  text-align: left; /* 设置标签的文本左对齐 */
+}
+
+/* 定义.input-row类下的label元素，用于设置标签的样式 */
+.input-row .unit-label {
+  flex: 60px; /* 设置标签的宽度为40% */
+  font-weight: bold; /* 设置标签的字体加粗 */
+  text-align: left; /* 设置标签的文本左对齐 */
+  font-size: medium;
+  align-items: center;
+}
+
+/* 定义.input-row类下的input元素，用于设置输入框S的样式 */
+.input-row input {
+  flex: 1; /* 设置输入框的宽度为剩余空间 */
+  padding: 8px; /* 设置输入框的内边距 */
+  border: 1px solid #ccc; /* 设置输入框的边框样式 */
+  border-radius: 4px; /* 设置输入框的边框圆角 */
+  min-width: 30px;
+}
+
+/* 定义.calculate-button类，用于设置计算按钮的样式 */
+.calculate-button {
+  width: 100%; /* 设置按钮的宽度为100% */
+  padding: 10px; /* 设置按钮的内边距 */
+  background-color: #007bff; /* 设置按钮的背景颜色 */
+  color: #fff; /* 设置按钮的文本颜色 */
+  border: none; /* 设置按钮的边框样式 */
+  border-radius: 5px; /* 设置按钮的边框圆角 */
+  cursor: pointer; /* 设置鼠标悬停在按钮上时的样式 */
+  font-size: 16px; /* 设置按钮的字体大小 */
+}
+
+.calculate-button:hover {
+  background-color: #0056b3;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #333;
+  text-align: left;
+}
+
+
+
+
+
+/* 自适应 */
+/* 当屏幕宽度小于等于600px时，应用以下样式 */
+@media (max-width: 600px) {
+  /* 菜单宽度为200px */
+  .menu {
+      width: 200px;
+  }
+  /* 内容字体大小为20px，左边距为40px */
+  .content {
+      font-size: 20px;
+      margin-left: 10px;
+  }
+  /* 头部字体大小为28px */
+  .header {
+      font-size: 28px;
+  }
+  .input-row label {
+    font-size: 14px;
+  }
+
+}

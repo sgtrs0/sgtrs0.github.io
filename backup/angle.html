@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<!-- 页面内容显示 -->
+<div class="content" id="content">
+    <h1>束散角计算</h1>
+</div>
+<div title="光学参数计算器">
+<div class="input-container">
+    <div class="input-row">
+        <img id="angleImage" src="" alt="束散角计算">
+        <script>
+            function updateImage() {
+              var imgElement = document.getElementById('angleImage');
+              if (window.innerWidth > 600) {
+                imgElement.src = 'angle_L.png'; // 将这里替换为实际的图1路径和文件名，如 'image1.jpg'
+              } else {
+                imgElement.src = 'angle_S.png'; // 将这里替换为实际的图2路径和文件名，如 'image2.jpg'
+              }
+            }
+            // 在页面加载和窗口大小改变时更新图片
+            if (window.addEventListener) {
+            window.addEventListener('load', updateImage);
+            window.addEventListener('resize', updateImage);
+            } else if (window.attachEvent) {
+            window.attachEvent('onload', updateImage);
+            window.attachEvent('onresize', updateImage);
+            }
+          </script>
+    </div>
+   <br>
+   <br>
+    <div class="input-row">
+        <label class="input-row unit-label">α（mrad）：</label>
+        <input type="number" id="apexAngleMrad" oninput="calculateIsoscelesTriangleBase()" value="1"> 
+    </div>
+    <div class="input-row">
+        <label class="input-row unit-label"> h（km）：</label>
+        <input type="number" id="heightKm" oninput="calculateIsoscelesTriangleBase()" value="1">
+    </div>
+    <div class="result" id="result_L"></div>
+</div>   
+
+</body>
+</html>
