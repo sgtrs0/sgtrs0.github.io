@@ -18,11 +18,15 @@
             <br>
             <div class="input-row">
                 <label class="input-row unit-label">α（mrad）：</label>
-                <input type="number" id="apexAngleMrad" oninput="calculateIsoscelesTriangleBase()" value="1"> 
+                <input type="number" id="apexAngleMrad" oninput="calculateIsoscelesTriangleBase_Rad()" value="1"> 
+            </div>
+            <div class="input-row">
+                <label class="input-row unit-label">α（°）：</label>
+                <input type="number" id="apexAngleDegrees" oninput="calculateIsoscelesTriangleBase_Deg()" value="1"> 
             </div>
             <div class="input-row">
                 <label class="input-row unit-label">h（km）：</label>
-                <input type="number" id="heightKm" oninput="calculateIsoscelesTriangleBase()" value="1">
+                <input type="number" id="heightKm" value="1">
             </div>
             <div class="result" id="result_L"></div>
         </div>   

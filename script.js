@@ -53,14 +53,14 @@ function calculateOptics() {
 
     document.getElementById('result').innerHTML = `
         <h3>计算结果：</h3>
-        <p>瞬时视场角：${ifovDeg.toFixed(2)}°   /   ${ifovRad.toFixed(4)} mrad</p>
-        <p>视场角：${fovHorizDeg.toFixed(2)}° x ${fovVertDeg.toFixed(2)}° / ${fovHorizRad.toFixed(4)} mrad x ${fovVertRad.toFixed(4)} mrad</p>
-        <p>目标占像素数：${targetPixelsHoriz.toFixed(2)} (水平) x ${targetPixelsVert.toFixed(2)} (垂直)</p>
-        <p>分辨力（@${targetDistance}km）：${spatialRes.toFixed(2)} m</p>
-        <p>视场范围（@${targetDistance}km）：${fieldSizeHoriz.toFixed(2)} m x ${fieldSizeVert.toFixed(2)} m</p>
-        <p>探测距离：${detectionDistance.toFixed(2)}km</p>
-        <p>识别距离：${recognitionDistance.toFixed(2)}km</p>
-        <p>辨认距离：${identificationDistance.toFixed(2)}km</p>
+        <p>瞬时视场角：${ifovDeg.toFixed(4)}°   /   ${ifovRad.toFixed(4)} mrad</p>
+        <p>视场角：${fovHorizDeg.toFixed(4)}° x ${fovVertDeg.toFixed(4)}° / ${fovHorizRad.toFixed(4)} mrad x ${fovVertRad.toFixed(4)} mrad</p>
+        <p>目标占像素数：${targetPixelsHoriz.toFixed(4)} (水平) x ${targetPixelsVert.toFixed(4)} (垂直)</p>
+        <p>分辨力（@${targetDistance}km）：${spatialRes.toFixed(4)} m</p>
+        <p>视场范围（@${targetDistance}km）：${fieldSizeHoriz.toFixed(4)} m x ${fieldSizeVert.toFixed(4)} m</p>
+        <p>探测距离：${detectionDistance.toFixed(4)}km</p>
+        <p>识别距离：${recognitionDistance.toFixed(4)}km</p>
+        <p>辨认距离：${identificationDistance.toFixed(4)}km</p>
     `;
 }
 
@@ -72,35 +72,35 @@ function calculateOptics() {
 function convertDegreesToMilliradians() {
     const degrees = parseFloat(document.getElementById('degrees').value) || 0;
     const milliradians = degrees * 1000 * Math.PI / 180;
-    document.getElementById('milliradians').value = milliradians.toFixed(2);
+    document.getElementById('milliradians').value = milliradians.toFixed(4);
 }
 
 // 毫弧度到度的转换
 function convertMilliradiansToDegrees() {
     const milliradians = parseFloat(document.getElementById('milliradians').value) || 0;
     const degrees = milliradians * 180 / (1000 * Math.PI);
-    document.getElementById('degrees').value = degrees.toFixed(2);
+    document.getElementById('degrees').value = degrees.toFixed(4);
 }
 
 // 波长 (μm) 到波数 (cm⁻¹) 的转换
 function convertWavelengthToWavenumber() {
     const wavelength = parseFloat(document.getElementById('wavelength').value) || 0;
     const wavenumber = 10000 / wavelength; // 1 μm = 10⁻⁴ cm
-    document.getElementById('wavenumber').value = wavenumber.toFixed(2);
+    document.getElementById('wavenumber').value = wavenumber.toFixed(4);
 }
 
 // 波数 (cm⁻¹) 到波长 (μm) 的转换
 function convertWavenumberToWavelength() {
     const wavenumber = parseFloat(document.getElementById('wavenumber').value) || 0;
     const wavelength = 10000 / wavenumber; // 1 μm = 10⁻⁴ cm
-    document.getElementById('wavelength').value = wavelength.toFixed(2);
+    document.getElementById('wavelength').value = wavelength.toFixed(4);
 }
 
 // 现有代码...
 
 
 
-function calculateIsoscelesTriangleBase() {
+function calculateIsoscelesTriangleBase_Rad() {
 
     const apexAngleMrad = parseFloat(document.getElementById('apexAngleMrad').value);
     const heightKm = parseFloat(document.getElementById('heightKm').value);
@@ -114,19 +114,57 @@ function calculateIsoscelesTriangleBase() {
     const baseKm = 2 * halfBaseKm;
 
     if(baseKm>1){
-        document.getElementById('result_L').innerHTML = `<p>L=：${baseKm.toFixed(2)}km</p>`;
+        document.getElementById('result_L').innerHTML = `<p>L=：${baseKm.toFixed(4)}km</p>`;
     }
     else if(baseKm>0.001)
     {
         // 将结果转换为米（1千米 = 1,000米）
         const baseM = baseKm * 1000;
-        document.getElementById('result_L').innerHTML = `<p>L=：${baseM.toFixed(2)}m</p>`;
+        document.getElementById('result_L').innerHTML = `<p>L=：${baseM.toFixed(4)}m</p>`;
     }
     else
     {
         // 将结果转换为毫米（1千米 = 1,000,000毫米）
         const baseMm = baseKm * 1000000;
-        document.getElementById('result_L').innerHTML = `<p>L=：${baseMm.toFixed(2)}mm</p>`;
+        document.getElementById('result_L').innerHTML = `<p>L=：${baseMm.toFixed(4)}mm</p>`;
     }
-    
+
+    const milliradians = parseFloat(document.getElementById('apexAngleMrad').value) || 0;
+    const degrees = milliradians * 180 / (1000 * Math.PI);
+    document.getElementById('apexAngleDegrees').value = degrees.toFixed(4);
+}
+
+
+function calculateIsoscelesTriangleBase_Deg() {
+
+    const apexAngleDegrees = parseFloat(document.getElementById('apexAngleDegrees').value);
+    const heightKm = parseFloat(document.getElementById('heightKm').value);
+    // 将顶角从毫弧度转换为弧度
+    const apexAngleRad = apexAngleDegrees * Math.PI / 180;;
+
+    // 使用正切函数计算底边边长的一半（单位：千米）
+    const halfBaseKm = Math.tan(apexAngleRad / 2) * heightKm;
+
+    // 计算完整的底边边长（单位：千米）
+    const baseKm = 2 * halfBaseKm;
+
+    if(baseKm>1){
+        document.getElementById('result_L').innerHTML = `<p>L=：${baseKm.toFixed(4)}km</p>`;
+    }
+    else if(baseKm>0.001)
+    {
+        // 将结果转换为米（1千米 = 1,000米）
+        const baseM = baseKm * 1000;
+        document.getElementById('result_L').innerHTML = `<p>L=：${baseM.toFixed(4)}m</p>`;
+    }
+    else
+    {
+        // 将结果转换为毫米（1千米 = 1,000,000毫米）
+        const baseMm = baseKm * 1000000;
+        document.getElementById('result_L').innerHTML = `<p>L=：${baseMm.toFixed(4)}mm</p>`;
+    }
+
+    const degrees = parseFloat(document.getElementById('apexAngleDegrees').value) || 0;
+    const milliradians = degrees * 1000 * Math.PI / 180;
+    document.getElementById('apexAngleMrad').value = milliradians.toFixed(4);
 }
