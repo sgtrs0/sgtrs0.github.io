@@ -105,7 +105,7 @@ function calculateIsoscelesTriangleBase() {
     const apexAngleMrad = parseFloat(document.getElementById('apexAngleMrad').value);
     const heightKm = parseFloat(document.getElementById('heightKm').value);
     // 将顶角从毫弧度转换为弧度
-    const apexAngleRad = apexAngleMrad * (Math.PI / 1000);
+    const apexAngleRad = apexAngleMrad * 0.001;
 
     // 使用正切函数计算底边边长的一半（单位：千米）
     const halfBaseKm = Math.tan(apexAngleRad / 2) * heightKm;
@@ -114,13 +114,13 @@ function calculateIsoscelesTriangleBase() {
     const baseKm = 2 * halfBaseKm;
 
     if(baseKm>1){
-        document.getElementById('result_L').innerHTML = `<p>L=：${baseMm.toFixed(2)}km</p>`;
+        document.getElementById('result_L').innerHTML = `<p>L=：${baseKm.toFixed(2)}km</p>`;
     }
     else if(baseKm>0.001)
     {
         // 将结果转换为米（1千米 = 1,000米）
-        const baseMm = baseKm * 1000;
-        document.getElementById('result_L').innerHTML = `<p>L=：${baseMm.toFixed(2)}m</p>`;
+        const baseM = baseKm * 1000;
+        document.getElementById('result_L').innerHTML = `<p>L=：${baseM.toFixed(2)}m</p>`;
     }
     else
     {
