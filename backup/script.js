@@ -15,14 +15,26 @@ function loadPage(page) {
 
 
 function calculateOptics() {
+    // 获取用户输入的分辨率宽度
     const resolutionWidth = parseFloat(document.getElementById('resolutionWidth').value);
+    // 获取用户输入的分辨率高度
     const resolutionHeight = parseFloat(document.getElementById('resolutionHeight').value);
+    // 获取用户输入的像素大小
     const pixelSize = parseFloat(document.getElementById('pixelSize').value);
+    // 获取用户输入的焦距
     const focalLength = parseFloat(document.getElementById('focalLength').value);
+
+    // 获取用户输入的光圈数
+    const f_number = parseFloat(document.getElementById('f_number').value);
+    // 获取用户输入的目标长度
     const targetLength = parseFloat(document.getElementById('targetLength').value);
+
+    // 获取用户输入的目标宽度
     const targetWidth = parseFloat(document.getElementById('targetWidth').value);
+    // 获取用户输入的目标距离
     const targetDistance = parseFloat(document.getElementById('targetDistance').value);
 
+    // 检查所有输入是否为数字，如果有任何一个不是数字，则显示错误信息
     if (isNaN(resolutionWidth) || isNaN(resolutionHeight) || isNaN(pixelSize) ||
         isNaN(focalLength) || isNaN(targetLength) || isNaN(targetWidth) || isNaN(targetDistance)) {
         document.getElementById('result').innerHTML = "<p>请填写所有字段。</p>";
@@ -41,6 +53,32 @@ function calculateOptics() {
     const fieldSizeHoriz = fovHorizRad * targetDistance;
     const fieldSizeVert = fovVertRad * targetDistance;
 
+    //
+    // 单位转换
+    const focalLength_m = focalLength / 1000; // mm → m
+    const pixelSize_m = pixelSize / 1000000; // μm → mm → m（弥散斑直径）
+    const c = 2 * pixelSize_m; // 容许弥散斑直径（2倍像素尺寸）
+
+    // 计算超焦距
+    const hyperfocal = (focalLength_m ** 2) / (f_number * c) + focalLength_m;
+
+    // 计算前景深和后景深
+    let frontDepth, backDepth;
+
+    if (targetDistance === Infinity) {
+        // 对焦无限远的情况
+        frontDepth = hyperfocal / 2;
+        backDepth = Infinity;
+    } else {
+        frontDepth = (hyperfocal * (targetDistance - focalLength_m)) /
+                    (hyperfocal + (targetDistance - 2 * focalLength_m));
+        
+        backDepth = (hyperfocal * (targetDistance - focalLength_m)) /
+                   (hyperfocal - targetDistance);
+    }
+
+    ////////////////////////////////////////////////////////////////
+
     // 目标尺寸（单位：米）
     const targetSize = Math.max(targetLength, targetWidth); // 使用目标的长度或宽度中的较大值
     // 约翰逊准则的像素要求
@@ -58,6 +96,7 @@ function calculateOptics() {
         <p>目标占像素数：${targetPixelsHoriz.toFixed(2)} (水平) x ${targetPixelsVert.toFixed(2)} (垂直)</p>
         <p>分辨力（@${targetDistance}km）：${spatialRes.toFixed(2)} m</p>
         <p>视场范围（@${targetDistance}km）：${fieldSizeHoriz.toFixed(2)} m x ${fieldSizeVert.toFixed(2)} m</p>
+        <p>景深（@${targetDistance}km）：${frontDepth.toFixed(2)} m(front) / ${backDepth.toFixed(2)} m(back)</p>
         <p>探测距离：${detectionDistance.toFixed(2)}km</p>
         <p>识别距离：${recognitionDistance.toFixed(2)}km</p>
         <p>辨认距离：${identificationDistance.toFixed(2)}km</p>
